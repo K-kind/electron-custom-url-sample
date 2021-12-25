@@ -14,6 +14,12 @@
     "files": [
       "src"
     ],
+    "protocols": {
+      "name": "Custom URL Sample",
+      "schemes": [
+        "custom-url"
+      ]
+    },
     "mac": {
       "target": "dmg"
     },
