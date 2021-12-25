@@ -1,3 +1,4 @@
+const path = require('path');
 const { app, BrowserWindow } = require('electron');
 
 let mainWindow;
@@ -8,7 +9,7 @@ const createWindow = () => {
     height: 600
   });
 
-  mainWindow.loadFile('index.html');
+  mainWindow.loadFile(path.join(__dirname, './index.html'));
 };
 
 app.on('ready', createWindow);

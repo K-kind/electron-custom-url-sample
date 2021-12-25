@@ -2,11 +2,27 @@
   "name": "electron-custom-url-sample",
   "version": "1.0.0",
   "scripts": {
-    "dev": "electron ./src"
+    "dev": "electron ./src/main.js",
+    "build:mac": "electron-builder --mac --x64",
+    "build:win": "electron-builder --win --x64"
   },
   "private": true,
   "license": "MIT",
+  "main": "src/main.js",
+  "build": {
+    "appId": "com.example.custom-url",
+    "files": [
+      "src"
+    ],
+    "mac": {
+      "target": "dmg"
+    },
+    "win": {
+      "target": "nsis"
+    }
+  },
   "devDependencies": {
-    "electron": "^16.0.5"
+    "electron": "^16.0.5",
+    "electron-builder": "^22.14.5"
   }
 }
