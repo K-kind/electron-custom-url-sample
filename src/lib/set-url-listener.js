@@ -6,9 +6,9 @@ const CUSTOM_SCHEME = 'custom-url';
  * @param {() => Promise<BrowserWindow>} getMainWindow
  * @return {boolean} whether app should continue to start or not
  */
-exports.setUrlListener = async (getMainWindow) => {
+exports.setUrlListener = (getMainWindow) => {
   if (process.platform === 'darwin') {
-    // this event is emitted whether the app has already been started or not
+    // emitted when url is clicked whether the app has already been started or not
     app.on('open-url', async (_event, url) => {
       const mainWindow = await getMainWindow();
       sendUrlToWindow(mainWindow, url);
@@ -24,7 +24,7 @@ exports.setUrlListener = async (getMainWindow) => {
 
     app.setAsDefaultProtocolClient(CUSTOM_SCHEME);
 
-    // this event is emitted inside the primary app when a second app calls requestSingleInstanceLock
+    // emitted inside the primary app when a second app calls requestSingleInstanceLock
     app.on('second-instance', async (_event, commandLineArgs) => {
       const mainWindow = await getMainWindow();
 
@@ -35,7 +35,7 @@ exports.setUrlListener = async (getMainWindow) => {
       mainWindow.focus();
     });
 
-    // when the app has been started by clicking url
+    // url is included in process.argv when the app has been started by clicking it
     const url = process.argv.find((arg) => arg.startsWith(`${CUSTOM_SCHEME}://`));
     url && getMainWindow().then((mainWindow) => sendUrlToWindow(mainWindow, url));
   }

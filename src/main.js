@@ -15,6 +15,10 @@ const createWindow = () => {
   });
 
   mainWindow.loadFile(path.join(__dirname, './index.html'));
+
+  ipcMain.once('window-ready', () => {
+    windowReady = true;
+  });
 };
 
 const getMainWindowWhenReady = async () => {
